@@ -26,6 +26,16 @@ export class CreateMedicos1661451588257 implements MigrationInterface {
             type: 'varchar',
             length: '15',
           },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP',
+          },
         ],
       }),
     );
