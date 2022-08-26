@@ -67,7 +67,7 @@ export class ConsultasService {
     return consulta;
   }
 
-  async upload(id: string, updateConsultaDto: Partial<CreateConsultaDTO>) {
+  async update(id: string, updateConsultaDto: Partial<CreateConsultaDTO>) {
     const consulta = await this.consultaRepository.preload({
       id,
       ...updateConsultaDto,
