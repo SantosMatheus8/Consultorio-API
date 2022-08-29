@@ -6,13 +6,14 @@ export const databaseProviders = [
     useFactory: async () => {
       const dataSource = new DataSource({
         type: 'mysql',
-        host: process.env.TYPEORM_HOST,
-        port: Number(process.env.TYPEORM_PORT),
-        username: process.env.TYPEORM_USERNAME,
+        host: 'localhost',
+        port: 3306,
+        username: 'root',
         password: '',
-        database: process.env.TYPEORM_DATABASE,
+        database: 'bancoestudos',
         entities: [__dirname + '/../**/*.entity.js'],
         synchronize: false,
+        migrations: ['src/database/migrations/*'],
       });
 
       return dataSource.initialize();
