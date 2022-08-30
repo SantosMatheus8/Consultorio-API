@@ -46,7 +46,14 @@ export class ConsultasService {
       );
     }
 
-    const consulta = this.consultaRepository.create({ ...createConsultaDto });
+    const dataConsulta = new Date(createConsultaDto.dataConsulta);
+
+    const consulta = this.consultaRepository.create({
+      dataConsulta,
+      medico: existeMedico,
+      receita: existeReceita,
+      paciente: existePaciente,
+    });
 
     return this.consultaRepository.save(consulta);
   }
@@ -68,6 +75,8 @@ export class ConsultasService {
   }
 
   async update(id: string, updateConsultaDto: Partial<CreateConsultaDTO>) {
+    updateConsultaDto.dataConsulta = new Date(updateConsultaDto.dataConsulta);
+
     const consulta = await this.consultaRepository.preload({
       id,
       ...updateConsultaDto,

@@ -8,7 +8,7 @@ export class CreateMedicos1661451588257 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'uuid',
+            type: 'varchar',
             isPrimary: true,
           },
           {

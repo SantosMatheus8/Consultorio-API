@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateConsultas1661451742161 implements MigrationInterface {
+export class CreateConsultas1661775021444 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -8,7 +8,7 @@ export class CreateConsultas1661451742161 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'uuid',
+            type: 'varchar',
             isPrimary: true,
           },
           {
@@ -17,15 +17,15 @@ export class CreateConsultas1661451742161 implements MigrationInterface {
           },
           {
             name: 'medico_id',
-            type: 'uuid',
+            type: 'varchar',
           },
           {
             name: 'paciente_id',
-            type: 'uuid',
+            type: 'varchar',
           },
           {
             name: 'receita_id',
-            type: 'uuid',
+            type: 'varchar',
             isNullable: true,
           },
           {

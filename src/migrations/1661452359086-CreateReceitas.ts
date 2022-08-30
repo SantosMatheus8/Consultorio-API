@@ -8,7 +8,7 @@ export class CreateReceitas1661452359086 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'uuid',
+            type: 'varchar',
             isPrimary: true,
           },
           {

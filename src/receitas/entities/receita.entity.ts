@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import { Consulta } from 'src/consultas/entities/consulta.entity';
 import {
   Column,
@@ -24,4 +25,10 @@ export class Receita {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = randomUUID();
+    }
+  }
 }

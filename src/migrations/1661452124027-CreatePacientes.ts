@@ -8,7 +8,7 @@ export class CreatePacientes1661452124027 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'uuid',
+            type: 'varchar',
             isPrimary: true,
           },
           {

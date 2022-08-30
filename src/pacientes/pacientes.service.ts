@@ -11,6 +11,10 @@ export class PacientesService {
   ) {}
 
   async create(createPacienteDto: CreatePacienteDTO) {
+    createPacienteDto.dataNascimento = new Date(
+      createPacienteDto.dataNascimento,
+    );
+
     const paciente = this.pacienteRepository.create({ ...createPacienteDto });
 
     return this.pacienteRepository.save(paciente);

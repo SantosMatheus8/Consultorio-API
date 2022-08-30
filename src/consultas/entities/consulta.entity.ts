@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import { Medico } from 'src/medicos/entities/medico.entity';
 import { Paciente } from 'src/pacientes/entities/paciente.entity';
 import { Receita } from 'src/receitas/entities/receita.entity';
@@ -37,4 +38,10 @@ export class Consulta {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = randomUUID();
+    }
+  }
 }
