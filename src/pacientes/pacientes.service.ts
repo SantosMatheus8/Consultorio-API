@@ -52,7 +52,7 @@ export class PacientesService {
   }
 
   async remove(id: string) {
-    const paciente = await this.pacienteRepository.findOne({ where: { id } });
+    const paciente = await this.findOne(id);
 
     return this.pacienteRepository.remove(paciente);
   }

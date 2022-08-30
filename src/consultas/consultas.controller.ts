@@ -38,7 +38,7 @@ export class ConsultasController {
   }
 
   @Delete(':id')
-  remove(@Param(':id') id: string) {
+  remove(@Param('id') id: string) {
     return this.consultasService.remove(id);
   }
 }
