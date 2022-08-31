@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { Consulta } from 'src/consultas/entities/consulta.entity';
+import { Consulta } from '../../../src/consultas/entities/consulta.entity';
 import {
   Column,
   CreateDateColumn,
