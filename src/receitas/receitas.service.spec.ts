@@ -90,6 +90,7 @@ describe('ReceitasService', () => {
 
       expect(receita).toEqual(receitaAtualizada);
       expect(repository.preload).toHaveBeenCalledTimes(1);
+      expect(repository.save).toHaveBeenCalledTimes(1);
     });
   });
 
