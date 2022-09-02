@@ -113,7 +113,7 @@ describe('ReceitasService', () => {
       jest.spyOn(repository, 'preload').mockResolvedValueOnce(undefined);
 
       try {
-        await await service.update('1', {
+        await service.update('1', {
           descricao: 'NovaDescrição',
         });
       } catch (error) {
