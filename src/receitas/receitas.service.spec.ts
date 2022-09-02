@@ -3,6 +3,7 @@ import { Receita } from './entities/receita.entity';
 import { ReceitasService } from './receitas.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { NotFoundException } from '@nestjs/common';
 
 const receita1 = new Receita();
 receita1.descricao = 'Ritalina';
@@ -77,6 +78,20 @@ describe('ReceitasService', () => {
       expect(receita).toEqual(listaDeReceitas[0]);
       expect(repository.findOne).toHaveBeenCalledTimes(1);
     });
+
+    it('deve retornar o erro NotFoundException', async () => {
+      const id = '1';
+      jest.spyOn(repository, 'findOne').mockResolvedValueOnce(undefined);
+
+      try {
+        await service.findOne(id);
+      } catch (error) {
+        expect(error).toBeInstanceOf(NotFoundException);
+        expect(error.message).toEqual(
+          `Não foi encontrado uma receita com o ID : ${id}`,
+        );
+      }
+    });
   });
 
   describe('update', () => {
@@ -91,6 +106,22 @@ describe('ReceitasService', () => {
       expect(receita).toEqual(receitaAtualizada);
       expect(repository.preload).toHaveBeenCalledTimes(1);
       expect(repository.save).toHaveBeenCalledTimes(1);
+    });
+
+    it('deve retornar o erro NotFoundException', async () => {
+      const id = '1';
+      jest.spyOn(repository, 'preload').mockResolvedValueOnce(undefined);
+
+      try {
+        await await service.update('1', {
+          descricao: 'NovaDescrição',
+        });
+      } catch (error) {
+        expect(error).toBeInstanceOf(NotFoundException);
+        expect(error.message).toEqual(
+          `Não foi encontrado uma receita com o ID : ${id}`,
+        );
+      }
     });
   });
 

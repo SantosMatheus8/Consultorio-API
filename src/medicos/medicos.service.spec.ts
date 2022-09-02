@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { Medico } from './entities/medico.entity';
 import { MedicosService } from './medicos.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 const medico1 = new Medico();
 medico1.id = '1ca415c6-32be-488c-b7bf-12b8649c99bd';
@@ -66,6 +67,23 @@ describe('MedicosService', () => {
       expect(repository.create).toHaveBeenCalledTimes(1);
       expect(repository.save).toHaveBeenCalledTimes(1);
     });
+
+    it('deve retornar o erro BadRequestException', async () => {
+      jest
+        .spyOn(repository, 'findOne')
+        .mockResolvedValueOnce(listaDeMedicos[0]);
+
+      try {
+        await service.create({
+          nome: 'Matheus',
+          telefone: '112345678',
+          crm: '45645631',
+        });
+      } catch (error) {
+        expect(error).toBeInstanceOf(BadRequestException);
+        expect(error.message).toEqual('O CRM informado já está cadastrado');
+      }
+    });
   });
 
   describe('findAll', () => {
@@ -86,6 +104,20 @@ describe('MedicosService', () => {
       expect(medico).toEqual(listaDeMedicos[0]);
       expect(repository.findOne).toHaveBeenCalledTimes(1);
     });
+
+    it('deve retornar o erro NotFoundException', async () => {
+      const id = '1';
+      jest.spyOn(repository, 'findOne').mockResolvedValueOnce(undefined);
+
+      try {
+        await service.findOne(id);
+      } catch (error) {
+        expect(error).toBeInstanceOf(NotFoundException);
+        expect(error.message).toEqual(
+          `Não foi encontrado um médico com o ID : ${id}`,
+        );
+      }
+    });
   });
 
   describe('update', () => {
@@ -100,6 +132,20 @@ describe('MedicosService', () => {
       expect(medico).toEqual(medicoAtualizado);
       expect(repository.preload).toHaveBeenCalledTimes(1);
       expect(repository.save).toHaveBeenCalledTimes(1);
+    });
+
+    it('deve retornar o erro NotFoundException', async () => {
+      const id = '1';
+      jest.spyOn(repository, 'preload').mockResolvedValueOnce(undefined);
+
+      try {
+        await service.update(id, { telefone: '5349583402' });
+      } catch (error) {
+        expect(error).toBeInstanceOf(NotFoundException);
+        expect(error.message).toEqual(
+          `Não foi encontrado um médico com o ID : ${id}`,
+        );
+      }
     });
   });
 

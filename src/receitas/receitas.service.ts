@@ -39,7 +39,7 @@ export class ReceitasService {
 
     if (!receita) {
       throw new NotFoundException(
-        `Não foi encontrado um médico com o ID : ${id}`,
+        `Não foi encontrado uma receita com o ID : ${id}`,
       );
     }
 

@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { Paciente } from './entities/paciente.entity';
 import { PacientesService } from './pacientes.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
+import { NotFoundException } from '@nestjs/common';
 
 const paciente1 = new Paciente();
 paciente1.id = '1ca415c6-32be-488c-b7bf-12b8649c99bd';
@@ -87,6 +88,20 @@ describe('PacientesService', () => {
       expect(paciente).toEqual(listaDePacientes[0]);
       expect(repository.findOne).toHaveBeenCalledTimes(1);
     });
+
+    it('deve retornar o erro NotFoundException', async () => {
+      const id = '1';
+      jest.spyOn(repository, 'findOne').mockResolvedValueOnce(undefined);
+
+      try {
+        await service.findOne(id);
+      } catch (error) {
+        expect(error).toBeInstanceOf(NotFoundException);
+        expect(error.message).toEqual(
+          `Não foi encontrado um paciente com o ID : ${id}`,
+        );
+      }
+    });
   });
 
   describe('update', () => {
@@ -101,6 +116,20 @@ describe('PacientesService', () => {
       expect(paciente).toEqual(pacienteAtualizado);
       expect(repository.preload).toHaveBeenCalledTimes(1);
       expect(repository.save).toHaveBeenCalledTimes(1);
+    });
+
+    it('deve retornar o erro NotFoundException', async () => {
+      const id = '1';
+      jest.spyOn(repository, 'preload').mockResolvedValueOnce(undefined);
+
+      try {
+        await service.update(id, { telefone: '5349583402' });
+      } catch (error) {
+        expect(error).toBeInstanceOf(NotFoundException);
+        expect(error.message).toEqual(
+          `Não foi encontrado um paciente com o ID : ${id}`,
+        );
+      }
     });
   });
 
