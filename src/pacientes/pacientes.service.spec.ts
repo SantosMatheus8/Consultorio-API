@@ -4,28 +4,28 @@ import { Paciente } from './entities/paciente.entity';
 import { PacientesService } from './pacientes.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 
+const paciente1 = new Paciente();
+paciente1.id = '1ca415c6-32be-488c-b7bf-12b8649c99bd';
+paciente1.nome = 'Matheus';
+paciente1.telefone = '112345678';
+paciente1.convenio = 'unimed';
+paciente1.dataNascimento = new Date('02/05/1999');
+
+const paciente2 = new Paciente();
+paciente2.id = 'c3d6b2a2-0c41-45da-ad0f-c5b20318c647';
+paciente2.nome = 'Julio';
+paciente2.telefone = '0987654';
+paciente2.convenio = 'unimed';
+paciente2.dataNascimento = new Date('07/04/1978');
+
+const pacienteAtualizado = paciente1;
+pacienteAtualizado.telefone = '5349583402';
+
+const listaDePacientes: Paciente[] = [paciente1, paciente2];
+
 describe('PacientesService', () => {
   let service: PacientesService;
   let repository: Repository<Paciente>;
-
-  const paciente1 = new Paciente();
-  paciente1.id = '1ca415c6-32be-488c-b7bf-12b8649c99bd';
-  paciente1.nome = 'Matheus';
-  paciente1.telefone = '112345678';
-  paciente1.convenio = 'unimed';
-  paciente1.dataNascimento = new Date('02/05/1999');
-
-  const paciente2 = new Paciente();
-  paciente1.id = 'c3d6b2a2-0c41-45da-ad0f-c5b20318c647';
-  paciente2.nome = 'Julio';
-  paciente2.telefone = '0987654';
-  paciente2.convenio = 'unimed';
-  paciente2.dataNascimento = new Date('07/04/1978');
-
-  const pacienteAtualizado = paciente1;
-  paciente2.telefone = '5349583402';
-
-  const listaDePacientes: Paciente[] = [paciente1, paciente2];
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
