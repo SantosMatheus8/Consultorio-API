@@ -30,7 +30,10 @@ export class MedicosController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() createMedicoDto: CreateMedicoDTO) {
+  update(
+    @Param('id') id: string,
+    @Body() createMedicoDto: Partial<CreateMedicoDTO>,
+  ) {
     return this.medicosService.update(id, createMedicoDto);
   }
 
