@@ -32,7 +32,7 @@ export class PacientesController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() createPacienteDto: CreatePacienteDTO,
+    @Body() createPacienteDto: Partial<CreatePacienteDTO>,
   ) {
     return this.pacientesService.update(id, createPacienteDto);
   }
