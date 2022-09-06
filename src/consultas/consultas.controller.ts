@@ -32,7 +32,7 @@ export class ConsultasController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() createConsultaDto: CreateConsultaDTO,
+    @Body() createConsultaDto: Partial<CreateConsultaDTO>,
   ) {
     return this.consultasService.update(id, createConsultaDto);
   }
