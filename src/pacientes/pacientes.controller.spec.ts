@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreatePacienteDTO } from './dto/create-paciente.dto';
+import { UpdatePacienteDto } from './dto/update-paciente.dto';
 import { Paciente } from './entities/paciente.entity';
 import { PacientesController } from './pacientes.controller';
 import { PacientesService } from './pacientes.service';
@@ -91,7 +92,7 @@ describe('PacientesController', () => {
 
   describe('update', () => {
     it('Deve atualizar um paciente específico', async () => {
-      const body: Partial<CreatePacienteDTO> = { telefone: '5349583402' };
+      const body: UpdatePacienteDto = { telefone: '5349583402' };
 
       const res = await controller.update(
         '1ca415c6-32be-488c-b7bf-12b8649c99bd',

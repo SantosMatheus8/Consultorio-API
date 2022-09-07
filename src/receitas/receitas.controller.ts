@@ -9,7 +9,10 @@ import {
 } from '@nestjs/common';
 import { CreateReceitaDTO } from './dto/create-receita.dto';
 import { ReceitasService } from './receitas.service';
+import { ApiTags } from '@nestjs/swagger';
+import { UpdateReceitaDto } from './dto/update-receita.dto';
 
+@ApiTags('Receitas')
 @Controller('receitas')
 export class ReceitasController {
   constructor(private readonly receitasService: ReceitasService) {}
@@ -30,8 +33,8 @@ export class ReceitasController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() createReceitaDTO: CreateReceitaDTO) {
-    return this.receitasService.update(id, createReceitaDTO);
+  update(@Param('id') id: string, @Body() updateReceitaDTO: UpdateReceitaDto) {
+    return this.receitasService.update(id, updateReceitaDTO);
   }
 
   @Delete(':id')

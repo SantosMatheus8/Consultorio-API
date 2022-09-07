@@ -9,7 +9,10 @@ import {
 } from '@nestjs/common';
 import { ConsultasService } from './consultas.service';
 import { CreateConsultaDTO } from './dto/create-consulta.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { UpdateConsultaDto } from './dto/update-consulta.dto';
 
+@ApiTags('Consultas')
 @Controller('consultas')
 export class ConsultasController {
   constructor(private readonly consultasService: ConsultasService) {}
@@ -32,9 +35,9 @@ export class ConsultasController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() createConsultaDto: Partial<CreateConsultaDTO>,
+    @Body() updateConsultaDto: UpdateConsultaDto,
   ) {
-    return this.consultasService.update(id, createConsultaDto);
+    return this.consultasService.update(id, updateConsultaDto);
   }
 
   @Delete(':id')

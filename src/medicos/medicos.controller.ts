@@ -9,11 +9,15 @@ import {
 } from '@nestjs/common';
 import { CreateMedicoDTO } from './dto/create-medico.dto';
 import { MedicosService } from './medicos.service';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
+import { UpdateMedicoDto } from './dto/update-medico.dto';
 
+@ApiTags('Medicos')
 @Controller('medicos')
 export class MedicosController {
   constructor(private readonly medicosService: MedicosService) {}
 
+  @ApiResponse({ status: 400, description: 'Conflicto no CRM' })
   @Post()
   create(@Body() createMedicoDto: CreateMedicoDTO) {
     return this.medicosService.create(createMedicoDto);
@@ -30,11 +34,8 @@ export class MedicosController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() createMedicoDto: Partial<CreateMedicoDTO>,
-  ) {
-    return this.medicosService.update(id, createMedicoDto);
+  update(@Param('id') id: string, @Body() updateMedicoDto: UpdateMedicoDto) {
+    return this.medicosService.update(id, updateMedicoDto);
   }
 
   @Delete(':id')

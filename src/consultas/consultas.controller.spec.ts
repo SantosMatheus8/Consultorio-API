@@ -5,6 +5,7 @@ import { Receita } from '../../src/receitas/entities/receita.entity';
 import { ConsultasController } from './consultas.controller';
 import { ConsultasService } from './consultas.service';
 import { CreateConsultaDTO } from './dto/create-consulta.dto';
+import { UpdateConsultaDto } from './dto/update-consulta.dto';
 import { Consulta } from './entities/consulta.entity';
 
 const medico = new Medico();
@@ -111,7 +112,7 @@ describe('ConsultasController', () => {
 
   describe('update', () => {
     it('Deve atualizar uma consulta específica', async () => {
-      const body: Partial<CreateConsultaDTO> = {
+      const body: UpdateConsultaDto = {
         dataConsulta: new Date('11/12/2022'),
       };
 

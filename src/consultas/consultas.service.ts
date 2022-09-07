@@ -4,6 +4,7 @@ import { Paciente } from 'src/pacientes/entities/paciente.entity';
 import { Receita } from 'src/receitas/entities/receita.entity';
 import { Repository } from 'typeorm';
 import { CreateConsultaDTO } from './dto/create-consulta.dto';
+import { UpdateConsultaDto } from './dto/update-consulta.dto';
 import { Consulta } from './entities/consulta.entity';
 
 @Injectable()
@@ -74,7 +75,7 @@ export class ConsultasService {
     return consulta;
   }
 
-  async update(id: string, updateConsultaDto: Partial<CreateConsultaDTO>) {
+  async update(id: string, updateConsultaDto: UpdateConsultaDto) {
     updateConsultaDto.dataConsulta = new Date(updateConsultaDto.dataConsulta);
 
     const consulta = await this.consultaRepository.preload({

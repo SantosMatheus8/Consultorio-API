@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateReceitaDTO } from './dto/create-receita.dto';
+import { UpdateReceitaDto } from './dto/update-receita.dto';
 import { Receita } from './entities/receita.entity';
 import { ReceitasController } from './receitas.controller';
 import { ReceitasService } from './receitas.service';
@@ -81,7 +82,7 @@ describe('ReceitasController', () => {
 
   describe('update', () => {
     it('Deve atualizar uma receita específica', async () => {
-      const body: CreateReceitaDTO = { descricao: 'NovaDescrição' };
+      const body: UpdateReceitaDto = { descricao: 'NovaDescrição' };
 
       const res = await controller.update(
         '1ca415c6-32be-488c-b7bf-12b8649c99bd',

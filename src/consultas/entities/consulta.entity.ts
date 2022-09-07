@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
-import { Medico } from '../../../src/medicos/entities/medico.entity';
-import { Paciente } from '../../../src/pacientes/entities/paciente.entity';
-import { Receita } from '../../../src/receitas/entities/receita.entity';
+import { Medico } from '../../medicos/entities/medico.entity';
+import { Paciente } from '../../pacientes/entities/paciente.entity';
+import { Receita } from '../../receitas/entities/receita.entity';
 import {
   Column,
   CreateDateColumn,

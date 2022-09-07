@@ -9,7 +9,10 @@ import {
 } from '@nestjs/common';
 import { CreatePacienteDTO } from './dto/create-paciente.dto';
 import { PacientesService } from './pacientes.service';
+import { ApiTags } from '@nestjs/swagger';
+import { UpdatePacienteDto } from './dto/update-paciente.dto';
 
+@ApiTags('Pacientes')
 @Controller('pacientes')
 export class PacientesController {
   constructor(private readonly pacientesService: PacientesService) {}
@@ -32,9 +35,9 @@ export class PacientesController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() createPacienteDto: Partial<CreatePacienteDTO>,
+    @Body() updatePacienteDto: UpdatePacienteDto,
   ) {
-    return this.pacientesService.update(id, createPacienteDto);
+    return this.pacientesService.update(id, updatePacienteDto);
   }
 
   @Delete(':id')

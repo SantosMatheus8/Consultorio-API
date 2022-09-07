@@ -1,6 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { CreatePacienteDTO } from './dto/create-paciente.dto';
+import { UpdatePacienteDto } from './dto/update-paciente.dto';
 import { Paciente } from './entities/paciente.entity';
 
 @Injectable()
@@ -36,7 +37,7 @@ export class PacientesService {
     return paciente;
   }
 
-  async update(id: string, updatePacienteDto: Partial<CreatePacienteDTO>) {
+  async update(id: string, updatePacienteDto: UpdatePacienteDto) {
     const paciente = await this.pacienteRepository.preload({
       id,
       ...updatePacienteDto,

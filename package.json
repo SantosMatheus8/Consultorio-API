@@ -21,17 +21,18 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node ./node_modules/.bin/typeorm",
     "typeorm:run": "typeorm-ts-node-commonjs -d ./src/database.providers.ts"
-
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/swagger": "^6.1.2",
     "@nestjs/typeorm": "^9.0.1",
     "mysql2": "^2.3.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "swagger-ui-express": "^4.5.0",
     "typeorm": "^0.3.6"
   },
   "devDependencies": {
@@ -71,11 +72,15 @@
     "clearMocks": true,
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "**/*.service.(t|j)s",
+      "**/*.controller.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "coverageProvider": "v8",
-    "coverageReporters": ["text-summary", "lcov"]
+    "coverageReporters": [
+      "text-summary",
+      "lcov"
+    ]
   }
 }
